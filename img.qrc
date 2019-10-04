@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/imagenes"/>
+    <qresource prefix="/">
+        <file>imagenes/bola.png</file>
+        <file>imagenes/estrella.png</file>
+        <file>imagenes/25_puntos.png</file>
+        <file>imagenes/100_puntos.png</file>
+        <file>imagenes/obstaculo1.png</file>
+        <file>imagenes/palanca.png</file>
+        <file>imagenes/palanca_derecha.png</file>
+    </qresource>
+</RCC>
