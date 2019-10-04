@@ -14,6 +14,8 @@ public:
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
 
+    //probando repositorio
+
     // Items de la escena
     QGraphicsScene * scene;
     Ball *ball;
