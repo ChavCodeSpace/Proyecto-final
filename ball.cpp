@@ -1,4 +1,5 @@
 #include "ball.h"
+#include "obstaculo.h"
 #include <QDebug>
 #include "game.h"
 #include <math.h>
@@ -17,10 +18,21 @@ Ball::Ball(QGraphicsItem * parent):QObject(),QGraphicsPixmapItem ()
     setPixmap(QPixmap(":/imagenes/bola.png"));
     setPos(250,350);
     setTransformOriginPoint(0,0);
+
 }
 
 void Ball::advance(int phase)
 {
+    //Agregar obstaculos
+    Obstaculo *obs = new Obstaculo();
+    obs->setPixmap(QPixmap(":/imagenes/estrella.png"));
+    obs->setPos(250,250);
+    scene()->addItem(obs);
+
+    Obstaculo *obs2 = new Obstaculo();
+    obs2->setPixmap(QPixmap(":/imagenes/obstaculo1.png"));
+    obs2->setPos(50,250);
+    scene()->addItem(obs2);
 
     // No hay colisión:
     if(scene()->collidingItems(this).isEmpty())
@@ -122,6 +134,15 @@ void Ball::advance(int phase)
         setX(x() + vx*dt);
         setY(y() + vy*dt);
         setPos(x(),y());
+
+        if (this->collidesWithItem(obs) || this->collidesWithItem(obs2)){
+            vx = -1*vx;
+            vy = -1*vy;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+            setPos(x(),y());
+        }
     }
 }
 

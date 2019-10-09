@@ -25,5 +25,5 @@ void Menu::on_pushButton_clicked()
 
 void Menu::on_pushButton_2_clicked()
 {
-
+    this->close();
 }

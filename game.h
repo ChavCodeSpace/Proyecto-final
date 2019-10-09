@@ -7,6 +7,7 @@
 #include "ball.h"
 #include "levers.h"
 #include "health.h"
+#include "obstaculo.h"
 
 class Game: public QGraphicsView{
 public:
@@ -24,6 +25,7 @@ public:
     int left_angle=0;
     int right_angle=0;
     Health *health;
+    Obstaculo *obs;
 
     QTimer * timer;
 };
