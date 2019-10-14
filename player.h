@@ -11,8 +11,12 @@ public:
     void setName(const QString &value);
     void updatePlayer();
     void addPoint();
+    QString getPass() const;
+    void setPass(const QString &value);
+
 private:
     QString name;
+    QString pass;
     int points;
 };
 

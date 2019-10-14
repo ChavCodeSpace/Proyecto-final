@@ -1,5 +1,6 @@
 #include <QApplication>
 #include "game.h"
+#include "menu.h"
 
 /*
 Tutorial Topics:
@@ -11,8 +12,9 @@ Game * game;
 int main(int argc, char *argv[]){
     QApplication a(argc, argv);
 
-    game = new Game();
-    game->show();
+    Menu *w = new Menu();
+    w->setModal(true);
+    w->show();
 
     return a.exec();
 }

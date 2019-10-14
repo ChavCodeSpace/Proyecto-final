@@ -18,7 +18,7 @@ QString Player::getName() const
 
 void Player::setName(const QString &value)
 {
-    name = value;
+    this->name = value;
 }
 
 void Player::updatePlayer()
@@ -30,4 +30,14 @@ void Player::addPoint()
 {
     points++;
     setPlainText(name+":"+QString::number(points)+QString("pts"));
+}
+
+QString Player::getPass() const
+{
+    return pass;
+}
+
+void Player::setPass(const QString &value)
+{
+    pass = value;
 }

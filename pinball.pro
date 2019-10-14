@@ -26,18 +26,30 @@ CONFIG += c++11
 
 SOURCES += \
         ball.cpp \
+        dialoglog.cpp \
         game.cpp \
         health.cpp \
+        instruccion.cpp \
         levers.cpp \
+        loginsolo.cpp \
+        logmulti.cpp \
         main.cpp \
+        menu.cpp \
+        nuevousuario.cpp \
         obstaculo.cpp \
         player.cpp
 
 HEADERS += \
     ball.h \
+    dialoglog.h \
     game.h \
     health.h \
+    instruccion.h \
     levers.h \
+    loginsolo.h \
+    logmulti.h \
+    menu.h \
+    nuevousuario.h \
     obstaculo.h \
     player.h
 
@@ -48,3 +60,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     imagenes.qrc
+
+FORMS += \
+    dialoglog.ui \
+    instruccion.ui \
+    loginsolo.ui \
+    logmulti.ui \
+    menu.ui \
+    nuevousuario.ui
