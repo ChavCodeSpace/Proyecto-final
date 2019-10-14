@@ -42,32 +42,48 @@ Game::Game(QWidget *parent){
 
     QPen mypen_rect=QPen(Qt::red);
     mypen_rect.setWidth(5);
-
+    // OBSTACULOS
     // Obstaculo 1
-    //Agregar obstaculos
     obs1 = new Obstaculo();
     obs1->setPixmap(QPixmap(":/imagenes/obstaculo1.png"));
-    obs1->setPos(40,HEIGHT-280);
+    obs1->setPos(60,HEIGHT-250);
     scene->addItem(obs1);
+    // Obstaculo 1b
+    //Agregar obstaculos
+    obs1b = new Obstaculo();
+    obs1b->setPixmap(QPixmap(":/imagenes/obstaculo1b.png"));
+    obs1b->setPos(WIDTH-90,250);
+    scene->addItem(obs1b);
 
-    //Obstaculos
+    //Obstaculos 2
     obs2 = new Obstaculo();
     obs2->setPixmap(QPixmap(":/imagenes/obstaculo2.png"));
-    obs2->setPos(300,300);
+    obs2->setPos(WIDTH-180,HEIGHT-250);
     scene->addItem(obs2);
 
-    // Bonus Estrella
-    Obstaculo *estrella = new Obstaculo();
-    estrella->setPixmap(QPixmap(":/imagenes/estrella.png"));
-    estrella->setPos(50,250);
-    scene->addItem(estrella);
+    // Obstaculo 2 b
+    //Agregar obstaculos
+    obs2b = new Obstaculo();
+    obs2b->setPixmap(QPixmap(":/imagenes/obstaculo2b.png"));
+    obs2b->setPos(60,250);
+    scene->addItem(obs2b);
+
+//    // Bonus Estrella
+//    Obstaculo *estrella = new Obstaculo();
+//    estrella->setPixmap(QPixmap(":/imagenes/estrella.png"));
+//    estrella->setPos(250,250);
+//    scene->addItem(estrella);
 
     // JUGADOR 1
     // Paredes
     scene->addLine(0,HEIGHT-120,WIDTH/3,HEIGHT-120,mypen_rect);
     scene->addLine(WIDTH-WIDTH/3,HEIGHT-120,WIDTH,HEIGHT-120,mypen_rect);
-
-    // Jugador 1
+    // Texto en escena
+    jugador_1=new Player();
+    jugador_1->setPos(jugador_1->x()+10,jugador_1->y()+600);
+    jugador_1->setName("Pulga");
+    jugador_1->updatePlayer();
+    scene->addItem(jugador_1);
     // Crear palanca izquierda
     left_lever_player_1= new Levers();
     left_lever_player_1->setPixmap(QPixmap(":/imagenes/palanca.png"));
@@ -76,15 +92,13 @@ Game::Game(QWidget *parent){
     QTransform t_left_player_1;
     t_left_player_1.translate(0,0).rotate(45);
     left_lever_player_1->setTransform(t_left_player_1);
-
-    left_lever_player_1->setFlag(QGraphicsItem::ItemIsFocusable);
-    left_lever_player_1->setFocus();
+    //left_lever_player_1->setFlag(QGraphicsItem::ItemIsFocusable);
+    //left_lever_player_1->setFocus();
     // Crear palanca derecha
     right_lever_player_1= new Levers();
     right_lever_player_1->setPixmap(QPixmap(":/imagenes/palanca.png"));
     right_lever_player_1->setPos(WIDTH-WIDTH/3,HEIGHT-120);
     scene->addItem(right_lever_player_1);
-
     QTransform t_right_player_1;
     t_right_player_1.translate(0,0).rotate(135);
     right_lever_player_1->setTransform(t_right_player_1);
@@ -93,6 +107,12 @@ Game::Game(QWidget *parent){
     // Paredes
     scene->addLine(0,120,WIDTH/3,120,mypen_rect);
     scene->addLine(WIDTH-WIDTH/3,120,WIDTH,120,mypen_rect);
+    //Texto en escena
+    jugador_2=new Player();
+    jugador_2->setPos(jugador_2->x()+10,jugador_2->y()+10);
+    jugador_2->setName("Chav");
+    jugador_2->updatePlayer();
+    scene->addItem(jugador_2);
     // Crear palanca izquierda
     left_lever_player_2= new Levers();
     left_lever_player_2->setPixmap(QPixmap(":/imagenes/palanca.png"));
@@ -101,15 +121,13 @@ Game::Game(QWidget *parent){
     QTransform t_left_player_2;
     t_left_player_2.translate(0,0).rotate(-45);
     left_lever_player_2->setTransform(t_left_player_2);
-
-    left_lever_player_2->setFlag(QGraphicsItem::ItemIsFocusable);
-    left_lever_player_2->setFocus();
+    //left_lever_player_2->setFlag(QGraphicsItem::ItemIsFocusable);
+    //left_lever_player_2->setFocus();
     // Crear palanca derecha
     right_lever_player_2= new Levers();
     right_lever_player_2->setPixmap(QPixmap(":/imagenes/palanca.png"));
     right_lever_player_2->setPos(WIDTH-WIDTH/3,120);
     scene->addItem(right_lever_player_2);
-
     QTransform t_right_player_2;
     t_right_player_2.translate(0,0).rotate(-135);
     right_lever_player_2->setTransform(t_right_player_2);
@@ -119,20 +137,6 @@ Game::Game(QWidget *parent){
 //    health->setPos(health->x()+10,health->y()+10);
 //    scene->addItem(health);
 
-    //JUGADOR 1
-    jugador_1=new Player();
-    jugador_1->setPos(jugador_1->x()+10,jugador_1->y()+600);
-    jugador_1->setName("Pulga");
-    jugador_1->updatePlayer();
-    scene->addItem(jugador_1);
-    show();
-
-    //JUGADOR 1
-    jugador_2=new Player();
-    jugador_2->setPos(jugador_2->x()+10,jugador_2->y()+10);
-    jugador_2->setName("Chav");
-    jugador_2->updatePlayer();
-    scene->addItem(jugador_2);
     show();
 
     //Conectar
@@ -181,3 +185,5 @@ void Game::keyReleaseEvent(QKeyEvent *event)
          right_lever_player_2->setRotation(right_angle_player_2);
      }
 }
+
+
