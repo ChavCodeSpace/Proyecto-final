@@ -30,14 +30,16 @@ SOURCES += \
         health.cpp \
         levers.cpp \
         main.cpp \
-        obstaculo.cpp
+        obstaculo.cpp \
+        player.cpp
 
 HEADERS += \
     ball.h \
     game.h \
     health.h \
     levers.h \
-    obstaculo.h
+    obstaculo.h \
+    player.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

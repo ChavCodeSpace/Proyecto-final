@@ -50,11 +50,11 @@ Game::Game(QWidget *parent){
     obs1->setPos(40,HEIGHT-280);
     scene->addItem(obs1);
 
-//    //Agregar obstaculos
-//    obs2 = new Obstaculo();
-//    obs2->setPixmap(QPixmap(":/imagenes/obstaculo2.png"));
-//    obs2->setPos(300,300);
-//    scene->addItem(obs2);
+    //Obstaculos
+    obs2 = new Obstaculo();
+    obs2->setPixmap(QPixmap(":/imagenes/obstaculo2.png"));
+    obs2->setPos(300,300);
+    scene->addItem(obs2);
 
     // Bonus Estrella
     Obstaculo *estrella = new Obstaculo();
@@ -114,11 +114,25 @@ Game::Game(QWidget *parent){
     t_right_player_2.translate(0,0).rotate(-135);
     right_lever_player_2->setTransform(t_right_player_2);
 
-    // Crear numero de vidas
-    health = new Health();
-    health->setPos(health->x()+10,health->y()+10);
-    scene->addItem(health);
+//    // Crear numero de vidas
+//    health = new Health();
+//    health->setPos(health->x()+10,health->y()+10);
+//    scene->addItem(health);
 
+    //JUGADOR 1
+    jugador_1=new Player();
+    jugador_1->setPos(jugador_1->x()+10,jugador_1->y()+600);
+    jugador_1->setName("Pulga");
+    jugador_1->updatePlayer();
+    scene->addItem(jugador_1);
+    show();
+
+    //JUGADOR 1
+    jugador_2=new Player();
+    jugador_2->setPos(jugador_2->x()+10,jugador_2->y()+10);
+    jugador_2->setName("Chav");
+    jugador_2->updatePlayer();
+    scene->addItem(jugador_2);
     show();
 
     //Conectar
@@ -130,16 +144,16 @@ Game::Game(QWidget *parent){
 void Game::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left){
-        right_angle_player_1+=45;
-        left_lever_player_1->setRotation(-right_angle_player_1);
+        left_angle_player_1+=45;
+        left_lever_player_1->setRotation(-left_angle_player_1);
     }
     if (event->key() ==Qt::Key_Right ) {
        right_angle_player_1=45;
        right_lever_player_1->setRotation(right_angle_player_1);
     }
     if (event->key() == Qt::Key_4){
-        right_angle_player_2+=-45;
-        left_lever_player_2->setRotation(-right_angle_player_2);
+        left_angle_player_2+=-45;
+        left_lever_player_2->setRotation(-left_angle_player_2);
     }
     if (event->key() ==Qt::Key_6 ) {
         right_angle_player_2=-45;
@@ -151,16 +165,16 @@ void Game::keyReleaseEvent(QKeyEvent *event)
 {
 
     if (event->key() ==Qt::Key_Left) {
-        right_angle_player_1=0;
-        left_lever_player_1->setRotation(right_angle_player_1);
+        left_angle_player_1=0;
+        left_lever_player_1->setRotation(left_angle_player_1);
     }
     if (event->key() ==Qt::Key_Right ) {
         right_angle_player_1=0;
         right_lever_player_1->setRotation(right_angle_player_1);
      }
      if (event->key() ==Qt::Key_4) {
-         right_angle_player_2=0;
-         left_lever_player_2->setRotation(right_angle_player_2);
+         left_angle_player_2=0;
+         left_lever_player_2->setRotation(left_angle_player_2);
      }
      if (event->key() ==Qt::Key_6 ) {
          right_angle_player_2=0;

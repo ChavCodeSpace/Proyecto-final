@@ -8,6 +8,7 @@
 #include "levers.h"
 #include "health.h"
 #include "obstaculo.h"
+#include "player.h"
 
 class Game: public QGraphicsView{
 public:
@@ -22,11 +23,13 @@ public:
     // BOLA
     Ball *ball;
     //JUGADOR 1
+    Player *jugador_1;
     Levers *left_lever_player_1;
     Levers *right_lever_player_1;
     int left_angle_player_1=0;
     int right_angle_player_1=0;
     //JUGADOR 2
+    Player *jugador_2;
     Levers *left_lever_player_2;
     Levers *right_lever_player_2;
     int left_angle_player_2=0;
