@@ -7,6 +7,6 @@
         <file>imagenes/100_puntos.png</file>
         <file>imagenes/obstaculo1.png</file>
         <file>imagenes/palanca.png</file>
-        <file>imagenes/palanca_derecha.png</file>
+        <file>imagenes/obstaculo2.png</file>
     </qresource>
 </RCC>

@@ -17,15 +17,26 @@ public:
 
     //probando repositorio
 
-    // Items de la escena
+    // ESCENA
     QGraphicsScene * scene;
+    // BOLA
     Ball *ball;
-    Levers *left_lever;    
-    Levers *right_lever;
-    int left_angle=0;
-    int right_angle=0;
+    //JUGADOR 1
+    Levers *left_lever_player_1;
+    Levers *right_lever_player_1;
+    int left_angle_player_1=0;
+    int right_angle_player_1=0;
+    //JUGADOR 2
+    Levers *left_lever_player_2;
+    Levers *right_lever_player_2;
+    int left_angle_player_2=0;
+    int right_angle_player_2=0;
+    // VIDAS
     Health *health;
-    Obstaculo *obs;
+    //OBSTACULOS
+    Obstaculo *obs1;
+    Obstaculo *obs2;
+    Obstaculo *estrella;
 
     QTimer * timer;
 };
