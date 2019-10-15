@@ -10,3 +10,6 @@ Levers::Levers()
     qDebug()<<"Se creo una palanca";
     setPos(0,0);
 }
+
+
+

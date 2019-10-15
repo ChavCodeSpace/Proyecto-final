@@ -137,6 +137,8 @@ Game::Game(QWidget *parent){
 //    health->setPos(health->x()+10,health->y()+10);
 //    scene->addItem(health);
 
+
+
     show();
 
     //Conectar
@@ -185,5 +187,7 @@ void Game::keyReleaseEvent(QKeyEvent *event)
          right_lever_player_2->setRotation(right_angle_player_2);
      }
 }
+
+
 
 

@@ -9,9 +9,11 @@
 #include "health.h"
 #include "obstaculo.h"
 #include "player.h"
+#include <QObject>
 
-class Game: public QGraphicsView{
 
+class Game:public QGraphicsView{
+    //Q_OBJECT
 public:
     Game(QWidget * parent=0);
     void keyPressEvent(QKeyEvent * event);
@@ -44,7 +46,6 @@ public:
     Obstaculo *obs2b;
     Obstaculo *estrella;
     QTimer * timer;
-
 };
 
 #endif // GAME_H

@@ -12,9 +12,9 @@ extern Game * game;
 
 Ball::Ball(QGraphicsItem * parent):QObject(),QGraphicsPixmapItem ()
 {
-
-    vx=8*pow(2,1/2)/2;
-    vy=8*pow(2,1/2)/2;
+    qsrand(time(NULL));
+    vx=(6+qrand()%(10-6))*pow(2,1/2)/2;
+    vy=(6+qrand()%(10-6))*pow(2,1/2)/2;
     setPixmap(QPixmap(":/imagenes/bola.png"));
     setPos(250,350);
     setTransformOriginPoint(0,0);
@@ -41,38 +41,36 @@ void Ball::advance(int phase)
         // Pendiente bola
         pendiente_bola=(y()-pos_y_antes_colision)/(x()-pos_x_antes_colision);
 
-        // Pared inferior y superior; y palancas arribas
-        if ((535<=y()&&y()<=550) ||( (110<=y()&&y()<=130))) {
-            // Pendiente pared
-            pendiente_obstaculo=0;
-            // Angulo de colisión
-            angulo_colision=atan2(pendiente_bola-pendiente_obstaculo,1+pendiente_bola*pendiente_obstaculo)* 180 / PI;
-            // Magnitud de la velocidad
-            velocidad=sqrt((vx*vx)+(vy*vy));
-            // Solo cambia la dirección de la velocidad en y
-            if(vx>=0)
-                vy=-velocidad*sin(angulo_colision*PI/180);
-            else
-                vy=velocidad*sin(angulo_colision*PI/180);
+        // Pared superior
+        if ((0<=x()&&x()<=500)&&(110<=y()&&y()<=125)) {
+            vy=-vy;
             // Actualizando posición despues de colisión
             qreal dt = 1;
             setX(x() + vx*dt);
             setY(y() + vy*dt);
             setPos(x(),y());
         }
-        // Pared derecha e izquierda
-        if((455<=x()&&x()<=465) || (-10<=x()&&x()<=5)){
-            // Pendiente pared
-            pendiente_obstaculo=0;
-            // Angulo de colisión
-            angulo_colision=atan2(pendiente_bola-pendiente_obstaculo,1+pendiente_bola*pendiente_obstaculo)* 180 / PI;
-            // Magnitud de la velocidad
-            velocidad=sqrt((vx*vx)+(vy*vy));
-            // Solo cambia la dirección de la velocidad en y
-            if(vy>=0)
-                vx=-velocidad*sin(angulo_colision*PI/180);
-            else
-                vx=velocidad*sin(angulo_colision*PI/180);
+        // Pared inferior
+        if ((0<=x()&&x()<=500)&&(530<=y()&&y()<=570)) {
+            vy=-vy;
+            // Actualizando posición despues de colisión
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Pared derecha
+        if((455<=x()&&x()<=500)&&(120<=y()&&y()<=580)){
+            vx=-vx;
+            // Actualizando posición despues de colisión
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Pared izquierda
+        if((-55<=x()&&x()<=2)&&(120<=y()&&y()<=580)){
+            vx=-vx;
             // Actualizando posición despues de colisión
             qreal dt = 1;
             setX(x() + vx*dt);
@@ -80,7 +78,7 @@ void Ball::advance(int phase)
             setPos(x(),y());
         }
         // Palanca jugador 1 y 2 en posición abajo
-        if((0<y() && y()<100) || (540<y() && y()<595) ){
+        if((70<=y() && y()<=115) || (540<=y() && y()<=595) ){
            vx=-vx;
            vy=-vy;
            // Actualizando posición despues de colisión
@@ -91,7 +89,7 @@ void Ball::advance(int phase)
         }
         //--------- Obstaculo 1 --------------
         // Derecha
-        if((60<=x() && x()<=70)&&(410<=y() && y()<=425)){
+        if((60<=x() && x()<=86)&&(404<=y() && y()<=486)){
             vx=-vx;
             vy=-vy;
             qreal dt = 1;
@@ -99,50 +97,138 @@ void Ball::advance(int phase)
             setY(y() + vy*dt);
             setPos(x(),y());
         }
-
+        // Izquierda
+        if((20<=x()&&x()<=35)&&(404<=y()&&y()<=486)){
+            vx=-vx;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Superior
+        if((35<=x()&&x()<=80)&&(410<=y()&&y()<=420)){
+            vy=-vy;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Inferior
+        if((35<=x()&&x()<=80)&&(458<=y()&&y()<=468)){
+            vy=-vy;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
 
         //--------- Obstaculo 1b -------------
         // Derecha
-        if((430<=x()&&x()<=440)&&(230<=y()&&y()<=245)){
+        if((427<=x()&&x()<=440)&&(230<=y()&&y()<=284)){
             vx=-vx;
             qreal dt = 1;
             setX(x() + vx*dt);
             setY(y() + vy*dt);
             setPos(x(),y());
         }
-        //--------- Obstaculo 2 --------------
-        // Arriba
-        if((300<=x()&&x()<=330)&&(410<=y()&&y()<=415)){
+        // Izquierda
+        if((375<=x()&&x()<=397)&&(230<=y()&&y()<=284)){
+            vx=-vx;
             vy=-vy;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Inferior
+        if((384<=x()&&x()<=457)&&(285<=y()&&y()<=296)){
+            vy=-vy;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Superior
+        if((384<=x()&&x()<=457)&&(210<=y()&&y()<=230)){
+            vy=-vy;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+
+        //--------- Obstaculo 2 --------------
+
+        // Superior
+        if((290<=x()&&x()<=374)&&(410<=y()&&y()<=418)){
+            vy=-vy;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Inferior
+        if((290<=x()&&x()<=374)&&(460<=y()&&y()<=474)){
+            vy=-vy;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+
+        // Derecha
+        if((365<=x()&&x()<=377)&&(417<=y()&&y()<=466)){
+            vx=-vx;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+        // Izquierda
+        if((275<=x()&&x()<=290)&&(417<=y()&&y()<=466)){
+            vx=-vx;
             qreal dt = 1;
             setX(x() + vx*dt);
             setY(y() + vy*dt);
             setPos(x(),y());
         }
         //--------- Obstaculo 2b--------------
-        //Izquierda
-        if((70<=x()&&x()<=115)&&(210<=y()&&y()<=230)){
-            vx=-vx;
+        //Superior
+        if((30<=x()&&x()<=120)&&(210<=y()&&y()<=221)){
+            vy=-vy;
             qreal dt = 1;
             setX(x() + vx*dt);
             setY(y() + vy*dt);
             setPos(x(),y());
         }
         //Inferior
-        if((60<=x()&&x()<=80)&&(260<=y()&&y()<=275)){
+        if((30<=x()&&x()<=120)&&(260<=y()&&y()<=274)){
             vy=-vy;
             qreal dt = 1;
             setX(x() + vx*dt);
             setY(y() + vy*dt);
             setPos(x(),y());
         }
-        //Superior
-        if((60<=x()&&x()<=80)&&(220<=y()&&y()<=235)){
-            vy=-vy;
+        //Izquierda
+        if((20<=x()&&x()<=30)&&(220<=y()&&y()<=270)){
+            vx=-vx;
             qreal dt = 1;
             setX(x() + vx*dt);
             setY(y() + vy*dt);
             setPos(x(),y());
+        }
+        // Derecha
+        if((110<=x()&&x()<=120)&&(220<=y()&&y()<=270)){
+            vx=-vx;
+            qreal dt = 1;
+            setX(x() + vx*dt);
+            setY(y() + vy*dt);
+            setPos(x(),y());
+        }
+
+        //--------- Eliminar bola y contar punto -------------
+        if(650<=y()&&y()<=720){
+
         }
 
 //        else {
