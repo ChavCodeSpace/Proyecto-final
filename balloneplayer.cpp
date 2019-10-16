@@ -1,6 +1,8 @@
 #include "balloneplayer.h"
 #include <QDebug>
 
+//Bola para un solo jugador
+
 Balloneplayer::Balloneplayer(QGraphicsItem * parent):QObject(),QGraphicsPixmapItem ()
 {
     qsrand(time(NULL));

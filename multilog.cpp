@@ -5,12 +5,15 @@
 #include "menu.h"
 #include <QDebug>
 
+//Funcion para el login de dos usuarios, para el modo versus
+
 MultiLog::MultiLog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MultiLog)
 {
     ui->setupUi(this);
 
+    //varaiables para comprobar que ambos usuarios logueen antes de jugar
     stateUser1 = false;
     stateUser2 = false;
 }
@@ -20,6 +23,7 @@ MultiLog::~MultiLog()
     delete ui;
 }
 
+//Funcion para validar usuarios, que recorre la lista de los jugadores para ver si existen o no
 bool MultiLog::validarUsuario(QString username, QString password)
 {
     for(int i=0;i<listUser.size();i++){
@@ -34,6 +38,7 @@ bool MultiLog::validarUsuario(QString username, QString password)
     return false;
 }
 
+//crear jugador
 void MultiLog::createUser(QString &username, QString &pass)
 {
     Player *play = new Player();
@@ -53,6 +58,7 @@ void MultiLog::setListUser(QList<Player *> listUser)
     this->listUser = listUser;
 }
 
+//boton pque crea una ventana para el registro de un nuevo usuario, si se amerita
 void MultiLog::on_newusr_clicked()
 {
     this->hide();
@@ -62,9 +68,10 @@ void MultiLog::on_newusr_clicked()
     np->show();
 }
 
+
 void MultiLog::on_play_clicked()
 {
-    if(stateUser1&&stateUser2){
+    if(stateUser1&&stateUser2){//Si ambos usuarios loguearon con exito, pueden jugar
         this->hide();
         Game *game = new Game();
         game->show();
@@ -81,7 +88,7 @@ void MultiLog::on_aceptar1_clicked()
     createUser(username,pass);
     if(validarUsuario(username,pass)){
         QMessageBox::information(this,"Login", "Usuario Correcto");
-        stateUser1 = true;
+        stateUser1 = true;//Si el usuario existe en la lista cambia el valor de la bandera
     }else{
         QMessageBox::information(this,"Login", "Usuario incorrecto");
     }
@@ -94,12 +101,13 @@ void MultiLog::on_aceptar2_clicked()
     createUser(username,pass);
     if(validarUsuario(username,pass)){
         QMessageBox::information(this,"Login", "Usuario Correcto");
-        stateUser2 = true;
+        stateUser2 = true;//Si el usuario existe en la lista cambia el valor de la bandera
     }else{
         QMessageBox::information(this,"Login", "Usuario incorrecto");
     }
 }
 
+//boton para volver al menu principal
 void MultiLog::on_atras_clicked()
 {
     this->hide();

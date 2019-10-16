@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QGraphicsPixmapItem>
 
+//Universo del juego para dos jugadores
 
 //Medidas de la escena
 #define WIDTH 500

@@ -4,6 +4,8 @@
 #include <math.h>
 #define PI 3.14159265
 
+//Bola para multijugador
+
 //Medidas de la escena
 #define WIDTH 500.0
 #define HEIGHT 700.0
@@ -28,7 +30,7 @@ void Ball::advance(int phase)
     {
         pos_x_antes_colision=x();
         pos_y_antes_colision=y();
-        recta();
+        circulo();
     }
     // Si hay colisión:
     else

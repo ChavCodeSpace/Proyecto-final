@@ -2,6 +2,7 @@
 #include "ui_instruccion.h"
 #include "menu.h"
 
+//Instrucciones para el juego, se pueden ver mejor en el archivo Form de esta clase
 Instruccion::Instruccion(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Instruccion)

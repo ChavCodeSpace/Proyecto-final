@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QGraphicsPixmapItem>
 
+//Universo del juego para un solo jugador
+
 //Medidas de la escena
 #define WIDTH 500
 #define HEIGHT 700

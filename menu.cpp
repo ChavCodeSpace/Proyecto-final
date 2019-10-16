@@ -7,6 +7,8 @@
 #include "multilog.h"
 #include "loginsolo.h"
 
+//Menu principal del juego
+
 Menu::Menu(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Menu)
@@ -19,6 +21,7 @@ Menu::~Menu()
     delete ui;
 }
 
+//Boton de VS (versus) que crea una ventana de login para los dos contrincantes
 void Menu::on_MultiPlayer_clicked()
 {
     this->hide();
@@ -27,6 +30,7 @@ void Menu::on_MultiPlayer_clicked()
     np->show();
 }
 
+//Boton para ver las instrucciones del juego
 void Menu::on_Instrucciones_clicked()
 {
     this->hide();
@@ -35,11 +39,13 @@ void Menu::on_Instrucciones_clicked()
     ins->show();
 }
 
+//Boton para cerrar el juego
 void Menu::on_Salir_clicked()
 {
     this->close();
 }
 
+//Boton para el jugador solo, que abre una ventana de login para un solo jugador
 void Menu::on_OnePlayer_clicked()
 {
     this->hide();

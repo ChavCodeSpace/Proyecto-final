@@ -7,6 +7,8 @@
 #include <QDebug>
 
 
+//Codigo para el login de un solo jugador
+
 LoginSolo::LoginSolo(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginSolo)
@@ -19,6 +21,7 @@ LoginSolo::~LoginSolo()
     delete ui;
 }
 
+//Funcion que recorre la lista y verifica la existencia del usuario
 bool LoginSolo::validarUsuario(QString username, QString password)
 {
     bool bandera=false;
@@ -36,6 +39,7 @@ bool LoginSolo::validarUsuario(QString username, QString password)
     return bandera;
 }
 
+//Funcion para crear un nuevo jugador
 void LoginSolo::createUser(QString &username, QString &pass)
 {
     Player *play = new Player();
@@ -50,11 +54,13 @@ void LoginSolo::setVal(QString *usern, QString *passw)
     pass = *passw;
 }
 
+//Funcion para actualizar la lista de usuarios
 void LoginSolo::setListUser(QList<Player *> listUser)
 {
     this->listUser = listUser;
 }
 
+//El boton aceptar que llama a la funcion para validar usuarios
 void LoginSolo::on_aceptar_clicked()
 {
     QString username = ui->nameus->text();
@@ -82,6 +88,7 @@ void LoginSolo::on_aceptar_clicked()
 //    archivo.close();
 }
 
+//FUncion para volver al menu de crear y logear usuarios
 void LoginSolo::on_atras_clicked()
 {
     this->hide();
