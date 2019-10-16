@@ -18,6 +18,7 @@ private:
     QString name;
     QString pass;
     int points;
+    QList<Player *> listUser;
 };
 
 #endif // PLAYER_H

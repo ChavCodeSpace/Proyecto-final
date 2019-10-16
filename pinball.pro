@@ -26,29 +26,33 @@ CONFIG += c++11
 
 SOURCES += \
         ball.cpp \
+        balloneplayer.cpp \
         dialoglog.cpp \
         game.cpp \
+        gamesolo.cpp \
         health.cpp \
         instruccion.cpp \
         levers.cpp \
         loginsolo.cpp \
-        logmulti.cpp \
         main.cpp \
         menu.cpp \
+        multilog.cpp \
         nuevousuario.cpp \
         obstaculo.cpp \
         player.cpp
 
 HEADERS += \
     ball.h \
+    balloneplayer.h \
     dialoglog.h \
     game.h \
+    gamesolo.h \
     health.h \
     instruccion.h \
     levers.h \
     loginsolo.h \
-    logmulti.h \
     menu.h \
+    multilog.h \
     nuevousuario.h \
     obstaculo.h \
     player.h
@@ -65,6 +69,6 @@ FORMS += \
     dialoglog.ui \
     instruccion.ui \
     loginsolo.ui \
-    logmulti.ui \
     menu.ui \
+    multilog.ui \
     nuevousuario.ui

@@ -4,6 +4,8 @@
 #include "instruccion.h"
 #include "nuevousuario.h"
 #include "dialoglog.h"
+#include "multilog.h"
+#include "loginsolo.h"
 
 Menu::Menu(QWidget *parent) :
     QDialog(parent),
@@ -20,8 +22,9 @@ Menu::~Menu()
 void Menu::on_MultiPlayer_clicked()
 {
     this->hide();
-    game = new Game();
-    game->show();
+    MultiLog *np = new MultiLog();
+    np->setModal(true);
+    np->show();
 }
 
 void Menu::on_Instrucciones_clicked()
@@ -40,7 +43,7 @@ void Menu::on_Salir_clicked()
 void Menu::on_OnePlayer_clicked()
 {
     this->hide();
-    DialogLog *np = new DialogLog();
+    LoginSolo *np = new LoginSolo();
     np->setModal(true);
     np->show();
 }

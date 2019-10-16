@@ -1,16 +1,7 @@
-#include "ball.h"
+#include "balloneplayer.h"
 #include <QDebug>
-#include "game.h"
-#include <math.h>
-#define PI 3.14159265
 
-//Medidas de la escena
-#define WIDTH 500.0
-#define HEIGHT 700.0
-
-extern Game * game;
-
-Ball::Ball(QGraphicsItem * parent):QObject(),QGraphicsPixmapItem ()
+Balloneplayer::Balloneplayer(QGraphicsItem * parent):QObject(),QGraphicsPixmapItem ()
 {
     qsrand(time(NULL));
     vx=(6+qrand()%(10-6))*pow(2,1/2)/2;
@@ -18,10 +9,9 @@ Ball::Ball(QGraphicsItem * parent):QObject(),QGraphicsPixmapItem ()
     setPixmap(QPixmap(":/imagenes/bola.png"));
     setPos(250,350);
     setTransformOriginPoint(0,0);
-
 }
 
-void Ball::advance(int phase)
+void Balloneplayer::advance(int phase)
 {
     // No hay colisión:
     if(scene()->collidingItems(this).isEmpty())
@@ -42,7 +32,7 @@ void Ball::advance(int phase)
         pendiente_bola=(y()-pos_y_antes_colision)/(x()-pos_x_antes_colision);
 
         // Pared superior
-        if ((0<=x()&&x()<=500)&&(110<=y()&&y()<=125)) {
+        if ((0<=x()&&x()<=500)&&(-10<=y()&&y()<=10)) {
             vy=-vy;
             // Actualizando posición despues de colisión
             qreal dt = 1;
@@ -60,7 +50,7 @@ void Ball::advance(int phase)
             setPos(x(),y());
         }
         // Pared derecha
-        if((455<=x()&&x()<=500)&&(120<=y()&&y()<=580)){
+        if((455<=x()&&x()<=500)&&(0<=y()&&y()<=580)){
             vx=-vx;
             // Actualizando posición despues de colisión
             qreal dt = 1;
@@ -69,7 +59,7 @@ void Ball::advance(int phase)
             setPos(x(),y());
         }
         // Pared izquierda
-        if((-55<=x()&&x()<=2)&&(120<=y()&&y()<=580)){
+        if((-55<=x()&&x()<=2)&&(0<=y()&&y()<=580)){
             vx=-vx;
             // Actualizando posición despues de colisión
             qreal dt = 1;
@@ -228,7 +218,7 @@ void Ball::advance(int phase)
 
         //--------- Eliminar bola y contar punto -------------
         if(650<=y()&&y()<=720){
-            //Player::addPoint()
+
         }
 
 //        else {
@@ -243,14 +233,14 @@ void Ball::advance(int phase)
 
 // Movimiento físicos
 // Rectilineo
-void Ball::recta(void){
+void Balloneplayer::recta(void){
     qreal dt = 1;
     setX(x() + vx*dt);
     setY(y() + vy*dt);
     setPos(x(),y());
 }
 // Circular
-void Ball::circulo(void){
+void Balloneplayer::circulo(void){
     static qreal dt = 1;
     //setX(x()+2*sin(dt));
     setX(x()+vx);
@@ -259,4 +249,5 @@ void Ball::circulo(void){
     setPos(x(),y());
     dt+=0.1;
 }
+
 

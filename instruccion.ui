@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>530</width>
+    <height>346</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Instrucciones</string>
   </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
@@ -38,8 +38,8 @@
     <rect>
      <x>20</x>
      <y>50</y>
-     <width>351</width>
-     <height>211</height>
+     <width>401</width>
+     <height>281</height>
     </rect>
    </property>
    <property name="font">
@@ -49,7 +49,7 @@
     </font>
    </property>
    <property name="text">
-    <string>El juego, en su modo para un solo jugador, trata de que se haga la mayor cantidad de puntos antes de perder las tres vidas disponibles. En el modo multijugador; retaras a un amigo a un partido de pinbal, en el cual ganara quien marque mas goles. </string>
+    <string>Pinbal es un juego que, en su modo para un jugador, debes hacer la mayor cantidad de puntos en una sola partida. En modo Versus(VS), te enfrentaras contra un amigo y ganara quien anote mas goles. Controles: usa las flechas izquierda y derecha para mover las palancas. En modo VS el segundo jugador mueve sus palancas con los botones 4 y 6.</string>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
@@ -58,8 +58,8 @@
   <widget class="QPushButton" name="Atras">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>270</y>
+     <x>440</x>
+     <y>320</y>
      <width>80</width>
      <height>21</height>
     </rect>

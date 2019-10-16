@@ -28,6 +28,7 @@ void DialogLog::on_exju_clicked()
 {
     this->hide();
     LoginSolo *log = new LoginSolo();
+    log->setListUser(listUser);
     log->setModal(true);
     log->show();
 }

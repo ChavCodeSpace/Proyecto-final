@@ -2,6 +2,7 @@
 #define DIALOGLOG_H
 
 #include <QDialog>
+#include "player.h"
 
 namespace Ui {
 class DialogLog;
@@ -24,6 +25,7 @@ private slots:
 
 private:
     Ui::DialogLog *ui;
+    QList<Player *> listUser;
 };
 
 #endif // DIALOGLOG_H

@@ -1,9 +1,11 @@
 #include "loginsolo.h"
 #include "ui_loginsolo.h"
 #include "game.h"
+#include "gamesolo.h"
 #include "menu.h"
 #include "dialoglog.h"
 #include <QDebug>
+
 
 LoginSolo::LoginSolo(QWidget *parent) :
     QDialog(parent),
@@ -19,16 +21,19 @@ LoginSolo::~LoginSolo()
 
 bool LoginSolo::validarUsuario(QString username, QString password)
 {
+    bool bandera=false;
     for(int i=0;i<listUser.size();i++){
         Player *userTemp = listUser.at(i);
         qDebug()<<userTemp->getName()<<":"<<userTemp->getPass();
+        qDebug()<<username;
         if(userTemp->getName()==username){
             if(userTemp->getPass()==password){
-                return true;
+                bandera=true;
+                //return bandera;
             }
         }
     }
-    return false;
+    return bandera;
 }
 
 void LoginSolo::createUser(QString &username, QString &pass)
@@ -54,21 +59,34 @@ void LoginSolo::on_aceptar_clicked()
 {
     QString username = ui->nameus->text();
     QString pass = ui->pasus->text();
+    qDebug()<<"entro a login";
     createUser(username,pass);
-    if(validarUsuario(username,pass)){
+    bool bandera_login=validarUsuario(username,pass);
+    if(bandera_login==true){
         QMessageBox::information(this,"Login", "Usuario Correcto");
         this->hide();
-        Game *game = new Game();
+        GameSolo *game = new GameSolo();
         game->show();
     }else{
         QMessageBox::information(this,"Login", "Usuario incorrecto");
     }
+
+//    QFile archivo("hola1.txt");
+//        QString datosExtra = "Esta es la segunda línea";
+//        if(archivo.open(QIODevice::WriteOnly | QIODevice::Text)){
+//            QTextStream datosArchivo(&archivo);
+//            datosArchivo << "Hola, esta es la primera línea del archivo \n\r";
+//            datosArchivo << datosExtra << endl;
+
+//        }
+//    archivo.close();
 }
 
 void LoginSolo::on_atras_clicked()
 {
     this->hide();
     DialogLog *w = new DialogLog();
+    this->setListUser(listUser);
     w->setModal(true);
     w->show();
 }

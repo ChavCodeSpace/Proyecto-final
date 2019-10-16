@@ -1,4 +1,4 @@
-#include "game.h"
+#include "gamesolo.h"
 #include <QTimer>
 #include <QGraphicsTextItem>
 #include <QFont>
@@ -6,14 +6,11 @@
 #include <QDebug>
 #include <QGraphicsPixmapItem>
 
-
 //Medidas de la escena
 #define WIDTH 500
 #define HEIGHT 700
 
-
-
-Game::Game(QWidget *parent)
+GameSolo::GameSolo(QWidget *parent)
 {
     // Creando escena
     scene = new QGraphicsScene();
@@ -41,8 +38,8 @@ Game::Game(QWidget *parent)
     scene->addLine(BottomLine,mypen);
 
     // Crear bola
-    ball = new Ball();
-    scene->addItem(ball);
+    ballo = new Balloneplayer();
+    scene->addItem(ballo);
 
     QPen mypen_rect=QPen(Qt::red);
     mypen_rect.setWidth(5);
@@ -107,59 +104,6 @@ Game::Game(QWidget *parent)
     t_right_player_1.translate(0,0).rotate(135);
     right_lever_player_1->setTransform(t_right_player_1);
 
-    // Jugador 2
-    // Paredes
-    scene->addLine(0,120,WIDTH/3,120,mypen_rect);
-    scene->addLine(WIDTH-WIDTH/3,120,WIDTH,120,mypen_rect);
-    //Texto en escena
-    jugador_2=new Player();
-    jugador_2->setPos(jugador_2->x()+10,jugador_2->y()+10);
-    jugador_2->setName("Chav");
-    jugador_2->updatePlayer();
-    scene->addItem(jugador_2);
-    // Crear palanca izquierda
-    left_lever_player_2= new Levers();
-    left_lever_player_2->setPixmap(QPixmap(":/imagenes/palanca.png"));
-    left_lever_player_2->setPos(WIDTH/3,120);
-    scene->addItem(left_lever_player_2);
-    QTransform t_left_player_2;
-    t_left_player_2.translate(0,0).rotate(-45);
-    left_lever_player_2->setTransform(t_left_player_2);
-    //left_lever_player_2->setFlag(QGraphicsItem::ItemIsFocusable);
-    //left_lever_player_2->setFocus();
-    // Crear palanca derecha
-    right_lever_player_2= new Levers();
-    right_lever_player_2->setPixmap(QPixmap(":/imagenes/palanca.png"));
-    right_lever_player_2->setPos(WIDTH-WIDTH/3,120);
-    scene->addItem(right_lever_player_2);
-    QTransform t_right_player_2;
-    t_right_player_2.translate(0,0).rotate(-135);
-    right_lever_player_2->setTransform(t_right_player_2);
-
-//    // Crear numero de vidas
-//    health = new Health();
-//    health->setPos(health->x()+10,health->y()+10);
-//    scene->addItem(health);
-
-    //Arduino
-    serial = new QSerialPort(); //Inicializar la variable serial
-    arduino_available = false;
-
-    foreach (const QSerialPortInfo &serial_info, QSerialPortInfo::availablePorts()) { //Lee toda la información del serial
-        qDebug()<<"Puerto: "<<serial_info.portName();
-        portName = serial_info.portName(); //Coloca el puerto serial disponible
-        qDebug()<<"vendorId: "<<serial_info.vendorIdentifier();
-        vendorrId = serial_info.vendorIdentifier(); //Coloca el id del dispositivo conectado en ese momento
-        qDebug()<<"ProductId: "<<serial_info.productIdentifier();
-        productId = serial_info.productIdentifier();
-        arduino_available = true;
-    }
-
-    if(arduino_available){
-        arduino_init();
-        qDebug()<<"entro a arduino";
-        //Este método establece todos los parámetros necesarios para iniciar la comunicación
-    }
 
     show();
 
@@ -169,7 +113,7 @@ Game::Game(QWidget *parent)
     timer->start(20);
 }
 
-void Game::keyPressEvent(QKeyEvent *event)
+void GameSolo::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left){
         left_angle_player_1+=45;
@@ -179,19 +123,10 @@ void Game::keyPressEvent(QKeyEvent *event)
        right_angle_player_1=45;
        right_lever_player_1->setRotation(right_angle_player_1);
     }
-    if (event->key() == Qt::Key_4){
-        left_angle_player_2+=-45;
-        left_lever_player_2->setRotation(-left_angle_player_2);
-    }
-    if (event->key() ==Qt::Key_6 ) {
-        right_angle_player_2=-45;
-        right_lever_player_2->setRotation(right_angle_player_2);
-    }
 }
 
-void Game::keyReleaseEvent(QKeyEvent *event)
+void GameSolo::keyReleaseEvent(QKeyEvent *event)
 {
-
     if (event->key() ==Qt::Key_Left) {
         left_angle_player_1=0;
         left_lever_player_1->setRotation(left_angle_player_1);
@@ -200,46 +135,4 @@ void Game::keyReleaseEvent(QKeyEvent *event)
         right_angle_player_1=0;
         right_lever_player_1->setRotation(right_angle_player_1);
      }
-     if (event->key() ==Qt::Key_4) {
-         left_angle_player_2=0;
-         left_lever_player_2->setRotation(left_angle_player_2);
-     }
-     if (event->key() ==Qt::Key_6 ) {
-         right_angle_player_2=0;
-         right_lever_player_2->setRotation(right_angle_player_2);
-     }
 }
-
-void Game::arduino_init()
-{
-    serial->setPortName(portName);
-    serial->setBaudRate(QSerialPort::Baud9600); //Debe ser la misma velocidad del arduino
-    serial->setDataBits(QSerialPort::Data8);
-    serial->setParity(QSerialPort::NoParity);
-    serial->setStopBits(QSerialPort::OneStop);
-    serial->setFlowControl(QSerialPort::NoFlowControl);
-    serial->open(QIODevice::ReadWrite);
-    QObject::connect(serial, SIGNAL(readyRead()),this, SLOT(serial_read())); //Conecta el evento del serial cuando hay algun dato en este con un slot definido
-
-}
-
-void Game::serial_read()
-{
-    if(serial->isWritable() && arduino_available){
-        QByteArray readDAta = serial->readAll();
-        qDebug()<<"Dato leido: "<<readDAta.toInt();
-        qDebug()<<readDAta.toInt()<<endl;
-        if (readDAta.toInt()==1111 ){
-            left_angle_player_1=0;
-            left_lever_player_1->setRotation(left_angle_player_1);
-        }
-        if (readDAta.toInt()== 2222){
-            right_angle_player_1=0;
-            right_lever_player_1->setRotation(right_angle_player_1);
-        }
-    }
-}
-
-
-
-

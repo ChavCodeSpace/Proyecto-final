@@ -1,5 +1,5 @@
-#ifndef BALL_H
-#define BALL_H
+#ifndef BALLONEPLAYER_H
+#define BALLONEPLAYER_H
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
@@ -9,11 +9,12 @@
 #include <QGraphicsScene>
 
 
-class Ball: public QObject,public QGraphicsPixmapItem
+
+class Balloneplayer: public QObject,public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
-    Ball(QGraphicsItem * parent=0);
+    Balloneplayer(QGraphicsItem * parent=0);
 public slots:
     void advance(int phase);
 private:
@@ -33,4 +34,4 @@ private:
     void circulo(void);
 };
 
-#endif // BALL_H
+#endif // BALLONEPLAYER_H

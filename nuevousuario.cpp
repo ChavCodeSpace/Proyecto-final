@@ -22,11 +22,10 @@ void NuevoUsuario::on_aceptar_clicked()
 {
     QString name = ui->name->text();
     QString pass = ui->pass->text();
-    Player *newp = new Player();
-    newp->setName(name);
-    newp->setPass(pass);
-    listUser.append(newp);
-    qDebug() << newp->getName()<<":"<< newp->getPass();
+    //qDebug() << name<<":"<<pass;
+    LoginSolo *log = new LoginSolo();
+    log->createUser(name,pass);
+    log->setListUser(listUser);
     this->hide();
     Menu *w = new Menu();
     w->setModal(true);

@@ -1,33 +1,28 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef GAMESOLO_H
+#define GAMESOLO_H
 
 #include <QGraphicsView>
 #include <QWidget>
 #include <QGraphicsScene>
-#include "ball.h"
+#include "balloneplayer.h"
 #include "levers.h"
 #include "health.h"
 #include "obstaculo.h"
 #include "player.h"
 #include <QObject>
-#include <QSerialPort>
-#include <QSerialPortInfo>
 
-class Game:public QGraphicsView
+
+class GameSolo: public QGraphicsView
 {
-   //Q_OBJECT
-
 public:
-    Game(QWidget * parent=0);
+    GameSolo(QWidget * parent=0);
     void keyPressEvent(QKeyEvent * event);
     void keyReleaseEvent(QKeyEvent *event);
-
-    //probando repositorio
 
     // ESCENA
     QGraphicsScene * scene;
     // BOLA
-    Ball *ball;
+    Balloneplayer *ballo;
     //JUGADOR 1
     Player *jugador_1;
     Levers *left_lever_player_1;
@@ -48,18 +43,8 @@ public:
     Obstaculo *obs2;
     Obstaculo *obs2b;
     Obstaculo *estrella;
-    //timer
     QTimer * timer;
-    //arduino
-    QSerialPort *serial;
-    QString portName;
-    quint16 vendorrId;
-    quint16 productId;
-    bool arduino_available;
-    void arduino_init();
 
-private slots:
-    void serial_read();
 };
 
-#endif // GAME_H
+#endif // GAMESOLO_H
